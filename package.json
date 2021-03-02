@@ -1,0 +1,31 @@
+{
+  "name": "poc-pipeless",
+  "version": "1.0.0",
+  "description": "POC testando o Pipeless, como funciona e no que ele pode nos ajudar",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "nconf": "^0.11.2",
+    "next": "^10.0.7",
+    "pipeless": "^1.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagocarmo/poc-pipeless.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiagocarmo/poc-pipeless/issues"
+  },
+  "homepage": "https://github.com/tiagocarmo/poc-pipeless#readme"
+}
