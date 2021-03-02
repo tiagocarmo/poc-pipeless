@@ -12,20 +12,28 @@ class apiClient {
     return httpClient;
   }
 
+  favorited = async (data) => {
+    if(!data && !data.userId && !data.companyId) {
+      return false;
+    }
+    const httpClient = this._getHttpClient();
+    await httpClient.get(`pipe/favorited?userId=${data.data.userId}&companyId=${data.data.companyId}`);
+  };
+
+  view = async (data) => {
+    if(!data && !data.userId && !data.companyId) {
+      return false;
+    }
+    const httpClient = this._getHttpClient();
+    await httpClient.get(`pipe/view?userId=${data.data.userId}&companyId=${data.data.companyId}`);
+  };
+
   like = async (data, like) => {
     if(!data && !data.userId && !data.companyId) {
       return false;
     }
     const httpClient = this._getHttpClient();
     await httpClient.get(`pipe/like?userId=${data.data.userId}&companyId=${data.data.companyId}&like=${like}`);
-  };
-
-  interested = async (data) => {
-    if(!data && !data.userId && !data.companyId) {
-      return false;
-    }
-    const httpClient = this._getHttpClient();
-    await httpClient.get(`pipe/interested?userId=${data.data.userId}&companyId=${data.data.companyId}`);
   };
 }
 

@@ -1,19 +1,27 @@
-import { ApiClient, GeneralApi } from 'pipeless';
+import { ApiClient, GeneralApi, RecommendationsApi } from 'pipeless';
 import getConfig from 'next/config';
 
 const { serverRuntimeConfig } = getConfig();
 
 class apiPipe {
-  _getInstance() {
+  _getInstance(type = 'default') {
     const defaultClient = ApiClient.instance;
     const App_API_Key = defaultClient.authentications['App_API_Key'];
     App_API_Key.apiKey = `Bearer ${serverRuntimeConfig.PIPELESS_API_KEY}`;
     this.appId = serverRuntimeConfig.PIPELESS_APP_ID;
 
-    return new GeneralApi();
+    switch (type) {
+      case 'recomendations':
+        return new RecommendationsApi();
+        break;
+      case 'default':
+      default:
+        return new GeneralApi();
+        break;
+    }
   }
 
-  interested = async ({ userId, companyId } = data) => {
+  favorited = async ({ userId, companyId } = data) => {
     if (!userId && !companyId) {
       return false;
     }
@@ -21,7 +29,8 @@ class apiPipe {
     const options = {
       event: {
         start_object: { id: userId, type: 'user' },
-        end_object: { id: companyId, type: 'company' }
+        relationship: { type: 'favorited' },
+        end_object: { id: companyId, type: 'product' }
       },
       synchronous: false
     };
@@ -31,7 +40,7 @@ class apiPipe {
       if (error) {
         console.error(error);
       }
-      console.log(`[INFO]: User <${userId}> interested in company <${companyId}>.`);
+      console.log(`[INFO]: User <${userId}> favorited product <${companyId}>.`);
     });
   };
 
@@ -44,7 +53,7 @@ class apiPipe {
       event: {
         start_object: { id: userId, type: 'user' },
         relationship: { type: 'viewed', single: false },
-        end_object: { id: companyId, type: 'company' }
+        end_object: { id: companyId, type: 'product' }
       },
       synchronous: false
     };
@@ -54,7 +63,7 @@ class apiPipe {
       if (error) {
         console.error(error);
       }
-      console.log(`[INFO]: User <${userId}> viewed company page <${companyId}>.`);
+      console.log(`[INFO]: User <${userId}> viewed product page <${companyId}>.`);
     });
   };
 
@@ -71,7 +80,7 @@ class apiPipe {
       event: {
         start_object: { id: userId, type: 'user' },
         relationship: { type, single: true },
-        end_object: { id: companyId, type: 'company' }
+        end_object: { id: companyId, type: 'product' }
       },
       synchronous: false
     };
@@ -79,7 +88,32 @@ class apiPipe {
       if (error) {
         console.error(error);
       }
-      console.log(`[INFO]: User <${userId}> ${type} company page <${companyId}>.`);
+      console.log(`[INFO]: User <${userId}> ${type} product <${companyId}>.`);
+    });
+  };
+
+  recomendations = async () => { // { userId } = data
+    console.log('solicitadas as recomendações');
+    const instance = this._getInstance('recomendations');
+
+    const options = {
+      object: { id: 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' },
+      // antonio // object: { id: 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' }, // consumerId
+      // tiago   // object: { id: '01b110a8-cc48-4f8c-bbf3-d53ae985f4e6', type: 'user' }, // uuid
+      content_object_type: 'product',
+      primary_positive_relationship_type: 'liked',
+      secondary_positive_relationship_type: 'favorited',
+      primary_negative_relationship_type: 'disliked'
+    };
+
+    return new Promise((resolve, reject) => {
+      instance.getRecommendedContent(this.appId, options, (error, resData, res) => {
+        if (error) {
+          reject(error);
+        }
+        console.log(`[INFO]: Getting product recomendations`);
+        resolve(resData);
+      });
     });
   };
 }

@@ -5,7 +5,7 @@ export default function handler(req, res) {
     query: { userId, companyId },
   } = req;
 
-  apiPipe.interested({
+  apiPipe.favorited({
     userId,
     companyId
   });

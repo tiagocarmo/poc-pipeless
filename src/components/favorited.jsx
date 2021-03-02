@@ -3,17 +3,19 @@ import Image from 'next/image';
 
 import apiClient from '../client/api';
 
-const Like = (data) => {
-  const [like, setLike] = useState(false);
+const Favorited = (data) => {
+  const [favorited, setFavorited] = useState(false);
 
-  const coracao = {
-    black: '/images/coracao-negro.svg',
-    red: '/images/coracao-vermelho.svg'
+  const check = {
+    black: '/images/check-negro.svg',
+    red: '/images/check-verde.svg'
   }
 
-  const toggleLike = () => {
-    apiClient.like(data, !like);
-    return setLike(!like);
+  const handleFavorited = () => {
+    if (!favorited) {
+      apiClient.favorited(data);
+      setFavorited(true);
+    }
   };
 
   const styles = {
@@ -34,18 +36,18 @@ const Like = (data) => {
   return (
     <button
       type='button'
-      onClick={() => toggleLike()}
+      onClick={() => handleFavorited()}
       style={styles.btn}
     >
       <Image
-        src={like ? coracao.red : coracao.black}
-        alt='Like'
+        src={favorited ? check.red : check.black}
+        alt='favorited'
         width='10'
         height='10'
       />
-      <span style={styles.text}>Curtir</span>
+      <span style={styles.text}>Favoritar</span>
     </button>
   );
 };
 
-export default Like;
+export default Favorited;

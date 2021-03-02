@@ -12,18 +12,18 @@ const Menu = () => (
       Anunciantes
       <ul>
         <li>
-          <a href='/anunciantes/bar'>
-            Bar [0880]
+          <a href='/anunciantes/bob-s-chicken-crispy-cheddar'>
+            Bob`s
           </a>
         </li>
         <li>
-          <a href='/anunciantes/ataba'>
-            Ataba: Clube de Livros
+          <a href='/anunciantes/bookplay-30-dias-r9'>
+            Bookplay
           </a>
         </li>
         <li>
-          <a href='/anunciantes/bellocookie'>
-            Bello Cookie
+          <a href='/anunciantes/primepass-singleday2d'>
+            Primepass
           </a>
         </li>
       </ul>
