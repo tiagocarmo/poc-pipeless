@@ -1,5 +1,5 @@
-import Like from '../components/like';
-import Menu from '../components/menu';
+import Like from '../../components/like';
+import Menu from '../../components/menu';
 
 const BelloCookiePage = ({ data }) => (
   <>
@@ -11,7 +11,7 @@ const BelloCookiePage = ({ data }) => (
 );
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/pipe?companyId=belocookie')
+  const res = await fetch('http://localhost:3000/api/pipe/view?companyId=belocookie')
   const data = await res.json()
   return { props: { data } }
 }

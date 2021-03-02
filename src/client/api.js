@@ -17,7 +17,15 @@ class apiClient {
       return false;
     }
     const httpClient = this._getHttpClient();
-    await httpClient.get(`pipeLike/?userId=${data.data.userId}&companyId=${data.data.companyId}&like=${like}`);
+    await httpClient.get(`pipe/like?userId=${data.data.userId}&companyId=${data.data.companyId}&like=${like}`);
+  };
+
+  interested = async (data) => {
+    if(!data && !data.userId && !data.companyId) {
+      return false;
+    }
+    const httpClient = this._getHttpClient();
+    await httpClient.get(`pipe/interested?userId=${data.data.userId}&companyId=${data.data.companyId}`);
   };
 }
 
