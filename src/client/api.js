@@ -13,27 +13,36 @@ class apiClient {
   }
 
   favorited = async (data) => {
-    if(!data && !data.userId && !data.companyId) {
+    if(!data) {
       return false;
     }
     const httpClient = this._getHttpClient();
-    await httpClient.get(`pipe/favorited?userId=${data.data.userId}&companyId=${data.data.companyId}`);
+    await httpClient.get(`pipe/favorited?userId=${data.userId}&companyId=${data.companyId}`);
   };
 
   view = async (data) => {
-    if(!data && !data.userId && !data.companyId) {
+    if(!data) {
       return false;
     }
     const httpClient = this._getHttpClient();
-    await httpClient.get(`pipe/view?userId=${data.data.userId}&companyId=${data.data.companyId}`);
+    await httpClient.get(`pipe/view?userId=${data.userId}&companyId=${data.companyId}`);
   };
 
   like = async (data, like) => {
-    if(!data && !data.userId && !data.companyId) {
+    if(!data) {
       return false;
     }
     const httpClient = this._getHttpClient();
-    await httpClient.get(`pipe/like?userId=${data.data.userId}&companyId=${data.data.companyId}&like=${like}`);
+    await httpClient.get(`pipe/like?userId=${data.userId}&companyId=${data.companyId}&like=${like}`);
+  };
+
+  recomendations = async (data) => {
+    if(!data) {
+      return false;
+    }
+    const httpClient = this._getHttpClient();
+    const listRecomendations = await httpClient.get(`pipe/recomendations?userId=${data.userId}`);
+    return listRecomendations.data;
   };
 }
 

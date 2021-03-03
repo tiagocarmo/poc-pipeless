@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import apiClient from '../client/api';
 
-const Like = (data) => {
+const Like = ({ data }) => {
   const [like, setLike] = useState(false);
 
   const coracao = {
@@ -13,7 +13,7 @@ const Like = (data) => {
 
   const toggleLike = () => {
     apiClient.like(data, !like);
-    return setLike(!like);
+    setLike(!like);
   };
 
   const styles = {

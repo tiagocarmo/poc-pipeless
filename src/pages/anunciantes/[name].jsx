@@ -1,5 +1,6 @@
 import Actions from '../../components/actions';
 import Layout from '../../template/layout';
+import Recomended4U from '../../components/recomended4u';
 
 const listPrizes = [
   {
@@ -53,9 +54,10 @@ const Anunciantes = ({ data, offer }) => {
   return (
     <Layout title={offer?.title}>
       <Actions data={data} />
-      {offer?.description
+      { offer?.description
         && <p dangerouslySetInnerHTML={{ __html: offer.description }} />
       }
+      <Recomended4U data={data} />
     </Layout>
   )
 };
@@ -74,10 +76,10 @@ export async function getServerSideProps({ params }) {
     const companyData = listPrizes.find(item => item.name === name);
 
     const props = {
-      data: data
+      data
     };
 
-    if(companyData) {
+    if (companyData) {
       props.offer = companyData
     } else {
       props.offer = {

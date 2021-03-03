@@ -92,12 +92,14 @@ class apiPipe {
     });
   };
 
-  recomendations = async () => { // { userId } = data
-    console.log('solicitadas as recomendações');
+  recomendations = async ({ userId } = data) => {
+    if (!userId) {
+      return false;
+    }
     const instance = this._getInstance('recomendations');
 
     const options = {
-      object: { id: 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' },
+      object: { id: userId || 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' }, // por default, carrega a id do antônio
       // antonio // object: { id: 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' }, // consumerId
       // tiago   // object: { id: '01b110a8-cc48-4f8c-bbf3-d53ae985f4e6', type: 'user' }, // uuid
       content_object_type: 'product',
@@ -105,6 +107,8 @@ class apiPipe {
       secondary_positive_relationship_type: 'favorited',
       primary_negative_relationship_type: 'disliked'
     };
+
+    console.log('[PEGANDO RECOMENDACOES] do usuário', options.object.id);
 
     return new Promise((resolve, reject) => {
       instance.getRecommendedContent(this.appId, options, (error, resData, res) => {

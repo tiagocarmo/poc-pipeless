@@ -22,7 +22,7 @@ const RecomendationsPage = ({ data }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/pipe/recomendations');
+  const res = await fetch('http://localhost:3000/api/pipe/recomendations'); // sem informar um usuario, então inseri um padrão
   const data = await res.json();
   return { props: { data } };
 }

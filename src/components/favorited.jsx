@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import apiClient from '../client/api';
 
-const Favorited = (data) => {
+const Favorited = ({ data }) => {
   const [favorited, setFavorited] = useState(false);
 
   const check = {
@@ -38,6 +38,7 @@ const Favorited = (data) => {
       type='button'
       onClick={() => handleFavorited()}
       style={styles.btn}
+      disabled={favorited}
     >
       <Image
         src={favorited ? check.red : check.black}
