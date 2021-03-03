@@ -5,9 +5,9 @@ export default async function handler(req, res) {
     query: { userId },
   } = req;
 
-  const recomendations = await apiPipe.recomendations({
+  const recomended = await apiPipe.recomended({
     userId
   });
 
-  res.status(200).json(recomendations.items);
+  res.status(200).json(recomended.items);
 }

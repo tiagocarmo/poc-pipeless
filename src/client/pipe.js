@@ -11,7 +11,7 @@ class apiPipe {
     this.appId = serverRuntimeConfig.PIPELESS_APP_ID;
 
     switch (type) {
-      case 'recomendations':
+      case 'recomended':
         return new RecommendationsApi();
         break;
       case 'default':
@@ -92,11 +92,11 @@ class apiPipe {
     });
   };
 
-  recomendations = async ({ userId } = data) => {
+  recomended = async ({ userId } = data) => {
     if (!userId) {
       return false;
     }
-    const instance = this._getInstance('recomendations');
+    const instance = this._getInstance('recomended');
 
     const options = {
       object: { id: userId || 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' }, // por default, carrega a id do antônio
@@ -108,14 +108,37 @@ class apiPipe {
       primary_negative_relationship_type: 'disliked'
     };
 
-    console.log('[PEGANDO RECOMENDACOES] do usuário', options.object.id);
-
     return new Promise((resolve, reject) => {
       instance.getRecommendedContent(this.appId, options, (error, resData, res) => {
         if (error) {
           reject(error);
         }
-        console.log(`[INFO]: Getting product recomendations`);
+        console.log(`[INFO]: Getting recomended content. Total: ${resData.items.length}`);
+        resolve(resData);
+      });
+    });
+  };
+
+  related = async ({ companyId } = data) => {
+    if (!companyId) {
+      return false;
+    }
+    const instance = this._getInstance('recomended');
+
+    const options = {
+      object: { id: companyId || '2-casquinhas-do-bob-s', type: 'product' },
+      content_tagged_relationship_type: 'taggedWith',
+      positive_rel: 'liked'
+    };
+
+    console.log('[PEGANDO RELACIONADO] a oferta', options.object.id);
+
+    return new Promise((resolve, reject) => {
+      instance.getRelatedContent(this.appId, options, (error, resData, res) => {
+        if (error) {
+          reject(error);
+        }
+        console.log(`[INFO]: Getting related content. Total: ${resData.items.length}`);
         resolve(resData);
       });
     });

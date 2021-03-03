@@ -6,9 +6,6 @@ const Menu = () => (
       </a>
     </li>
     <li>
-      <a href='/recomendacoes'>Recomendações</a>
-    </li>
-    <li>
       Anunciantes
       <ul>
         <li>

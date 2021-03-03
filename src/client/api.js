@@ -36,13 +36,22 @@ class apiClient {
     await httpClient.get(`pipe/like?userId=${data.userId}&companyId=${data.companyId}&like=${like}`);
   };
 
-  recomendations = async (data) => {
+  recomended = async (data) => {
     if(!data) {
       return false;
     }
     const httpClient = this._getHttpClient();
-    const listRecomendations = await httpClient.get(`pipe/recomendations?userId=${data.userId}`);
-    return listRecomendations.data;
+    const listRecomended = await httpClient.get(`pipe/recomended?userId=${data.userId}`);
+    return listRecomended.data;
+  };
+
+  related = async (data) => {
+    if(!data) {
+      return false;
+    }
+    const httpClient = this._getHttpClient();
+    const listRelated = await httpClient.get(`pipe/related?companyId=${data.companyId}`);
+    return listRelated.data;
   };
 }
 

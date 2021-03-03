@@ -1,6 +1,9 @@
 - descobrir como fazer upload da base de dados completa
 
-http://localhost:3000/anunciantes/primepass-singleday2d
+https://github.com/tiagocarmo/poc-pipeless/tree/MINU-677
+
+http://localhost:3000/
+
 https://docs.pipeless.io/docs/content-recommendations
 https://docs.pipeless.io/reference/general
 https://docs.pipeless.io/reference/recommendations

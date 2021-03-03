@@ -2,17 +2,17 @@ import { useState } from 'react';
 
 import apiClient from '../client/api';
 
-const Recomended4U = ({ data }) => {
-  const [recomended, setRecomended] = useState([]);
+const Related4U = ({ data }) => {
+  const [related, setRelated] = useState([]);
   const [none, setNone] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleLoadRecomended = async () => {
+  const handleLoadRelated = async () => {
     setLoading(true);
-    const recomendacoes = await apiClient.recomended(data);
-    if(recomendacoes?.length > 0) {
+    const related = await apiClient.related(data);
+    if(related?.length > 0) {
       setNone(false);
-      setRecomended(recomendacoes);
+      setRelated(related);
     } else {
       setNone(true);
     }
@@ -33,18 +33,18 @@ const Recomended4U = ({ data }) => {
 
   return (
     <>
-      <h3>Recomendações para usuário {data.userId}</h3>
+      <h3>Ofertas relacionadas a oferta {data.companyId}</h3>
       <button
-        onClick={() => handleLoadRecomended()}
+        onClick={() => handleLoadRelated()}
         type='button'
         style={styles.btn}
       >
-        Carregar Recomendações (getRecommendedContent)
+        Carregar Ofertas Similares (getRelatedContent)
       </button>
       { loading && <p>Aguarde...</p> }
       { !loading
-        && recomended
-        && recomended.map((item, key) => {
+        && related
+        && related.map((item, key) => {
           return (
             <li key={key}>
               <a href={`/anunciantes/${item.object.id}`}>
@@ -56,11 +56,10 @@ const Recomended4U = ({ data }) => {
       }
       { !loading
         && none
-        && <p>Nenhuma recomendação foi obtida na busca</p>
+        && <p>Nenhuma oferta similar foi obtida na busca</p>
       }
-      <hr />
     </>
   );
 }
 
-export default Recomended4U;
+export default Related4U;

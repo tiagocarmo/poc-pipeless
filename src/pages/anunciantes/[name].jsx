@@ -1,6 +1,7 @@
 import Actions from '../../components/actions';
 import Layout from '../../template/layout';
 import Recomended4U from '../../components/recomended4u';
+import Related4U from '../../components/related4u';
 
 const listPrizes = [
   {
@@ -58,6 +59,7 @@ const Anunciantes = ({ data, offer }) => {
         && <p dangerouslySetInnerHTML={{ __html: offer.description }} />
       }
       <Recomended4U data={data} />
+      <Related4U data={data} />
     </Layout>
   )
 };
