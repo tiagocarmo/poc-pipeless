@@ -1,0 +1,42 @@
+Exemplo: http://localhost:3000/anunciantes/bob-s-milk-shake
+
+- Descobrir como fazer upload da base de dados completa
+
+https://github.com/tiagocarmo/poc-pipeless/tree/MINU-677
+
+http://localhost:3000/
+
+https://docs.pipeless.io/docs/content-recommendations
+https://docs.pipeless.io/reference/general
+https://docs.pipeless.io/reference/recommendations
+
+=====================================
+=====================================
+
+[oferta ou recompensas]
+
+1º momento
+produto > categoria
+related > produto <-na mesma categoria, tipo ou precos->
+[
+  tipo: Fisico, Digital
+  categorias: Alimentação, Transporte, Musica
+  precos: Abaixo de 10, 11 a 30, mais que 31 (recompensa)
+  precos: Abaixo de 50, 51 a 100, mais que 101 (oferta)
+]
+
+---
+
+Geração de eventos
+
+- Pensar quais os eventos [view, like, purchase, moreInfo (custom)]
+- Quais são as ofertas que vc gosta (da 3 opções pro usuario escolher uma)
+- Podemos criar um evento de view clicando nos tópicos
+
+Visualização destes dados
+
+- Na tela de recompensas, exibir baseado em um dataset já informado
+- Na tela de sucesso poderiamos sugerir algumas outras ofertas
+
+---
+
