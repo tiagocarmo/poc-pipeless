@@ -2,11 +2,16 @@ import Menu from '../components/menu';
 
 const HomePage = () => {
   return (
-    <>
-      <h1>Index (Home)</h1>
-      <p>Não existem eventos neste página</p>
-      <Menu />
-    </>
+    <div className='grid'>
+      <div className='container'>
+        <div className='header'>
+          <h1 className='grifado'>recomenda recompensas</h1>
+        </div>
+        <div className='sidebar'>
+          <Menu />
+        </div>
+      </div>
+    </div>
   );
 };
 

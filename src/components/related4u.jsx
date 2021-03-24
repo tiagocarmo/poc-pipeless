@@ -1,56 +1,78 @@
 import { useState } from 'react';
 
 import apiClient from '../client/api';
+import { getPrizeInfo } from '../prizes/list';
 
-const Related4U = ({ data }) => {
+const Related4U = ({ data, offer }) => {
   const [related, setRelated] = useState([]);
   const [none, setNone] = useState(false);
   const [loading, setLoading] = useState(false);
+  // console.log(offer);
 
   const handleLoadRelated = async () => {
     setLoading(true);
     const related = await apiClient.related(data);
-    if(related?.length > 0) {
+    if (related?.length > 0) {
+      const newRelated = [];
+      let temp = {};
+      related.forEach(item => {
+        const id = item.object.id;
+        temp = getPrizeInfo(id);
+        if (temp) {
+          newRelated.push({
+            ...temp,
+            id
+          });
+        } else {
+          newRelated.push({
+            id: id,
+            name: id,
+            title: id,
+            description: 'Sem informações da oferta',
+            banner: 'https://www.cellmax.eu/wp-content/uploads/2020/01/Hero-Banner-Placeholder-Dark-1024x480-1.png',
+            avatar: 'https://livejones.com/wp-content/uploads/2020/05/logo-Placeholder.png'
+          });
+        }
+      });
       setNone(false);
-      setRelated(related);
+      setRelated(newRelated);
     } else {
       setNone(true);
     }
     setLoading(false);
   };
 
-  const styles = {
-    btn: {
-      cursor: 'pointer',
-      border: '1px solid grey',
-      background: '#f9f9f9',
-      outline: 'none',
-      padding: '6px 12px',
-      borderRadius: '8px',
-      marginRight: '16px'
-    }
-  };
-
   return (
-    <>
-      <h3>Ofertas relacionadas a oferta {data.companyId}</h3>
+    <div className='box'>
+      <h3>Oferta: <span className='highlight'>{data.companyId}</span></h3>
       <button
         onClick={() => handleLoadRelated()}
         type='button'
-        style={styles.btn}
+        className='btn'
       >
-        Carregar Ofertas Similares (getRelatedContent)
+        <strong>Carregar</strong> conteúdo relacionado a oferta
       </button>
-      { loading && <p>Aguarde...</p> }
+      { loading && <p>Aguarde...</p>}
       { !loading
         && related
         && related.map((item, key) => {
           return (
-            <li key={key}>
-              <a href={`/anunciantes/${item.object.id}`}>
-                {item.object.id}
-              </a>
-            </li>
+            <div className='card' key={key}>
+              <div className='card-banner'>
+                <img src={item.banner} className='img-fluid' />
+              </div>
+              <div className='card-avatar'>
+                <img src={item.avatar} className='img-fluid' />
+                <em>{item.id}</em>
+              </div>
+              <div className='card-content'>
+                <strong>{item.title}</strong>
+                <p>{item.description}</p>
+                <a href={`/anunciantes/${item.id}`}>
+                  Ver oferta ➞
+                </a>
+              </div>
+            </div>
           );
         })
       }
@@ -58,7 +80,7 @@ const Related4U = ({ data }) => {
         && none
         && <p>Nenhuma oferta similar foi obtida na busca</p>
       }
-    </>
+    </div>
   );
 }
 

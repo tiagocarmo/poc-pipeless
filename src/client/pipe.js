@@ -99,9 +99,7 @@ class apiPipe {
     const instance = this._getInstance('recomended');
 
     const options = {
-      object: { id: userId || 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' }, // por default, carrega a id do antônio
-      // antonio // object: { id: 'a868d0c48815477aaa4cc132b588eb6b', type: 'user' }, // consumerId
-      // tiago   // object: { id: '01b110a8-cc48-4f8c-bbf3-d53ae985f4e6', type: 'user' }, // uuid
+      object: { id: userId , type: 'user' },
       content_object_type: 'product',
       primary_positive_relationship_type: 'liked',
       secondary_positive_relationship_type: 'favorited',
@@ -126,7 +124,7 @@ class apiPipe {
     const instance = this._getInstance('recomended');
 
     const options = {
-      object: { id: companyId || '2-casquinhas-do-bob-s', type: 'product' },
+      object: { id: companyId, type: 'product' },
       content_tagged_relationship_type: 'taggedWith',
       positive_rel: 'liked'
     };

@@ -1,0 +1,174 @@
+* {
+  outline: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #404040;
+  font-family: 'Roboto Mono', monospace;
+}
+
+h1, .title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 32px;
+  color: #0B2D33;
+}
+
+a, .subtitle {
+  color: #0B2D33;
+  font-family: Roboto, serif;
+}
+
+.grifado {
+  display: inline-block;
+  box-shadow: inset 0 -.2em #fff,
+    inset 0 -.5em #BEF5DC;
+}
+
+.subtitle {
+  font-size: 18px;
+}
+
+.grid {
+  margin: 0 auto;
+  max-width: 1580px;
+  width: 100%;
+}
+
+.container {
+  padding: 16px 24px
+}
+
+.header {
+  display: block;
+  font-family: 'Roboto Slab', serif;
+}
+
+.btn {
+  color: #404040;
+  display: block;
+  margin: 32px 0;
+  line-height: 24px;
+  padding: 12px 25px;
+  width: fit-content;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background-color: #BEF5DC;
+  font-family: Roboto, serif;
+  cursor: pointer;
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+}
+
+.card {
+  display: inline-block;
+  width: 256px;
+  height: 400px;
+  background-color: #f9f9f9;
+  vertical-align: top;
+  margin: 10px 18px;
+  border-radius: 20px;
+}
+
+.card-banner img {
+  min-height: 128px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-avatar {
+  position: relative;
+}
+
+.card-avatar img {
+  border: 3px solid #f9f9f9;
+  max-width: 80px;
+  border-radius: 50%;
+  margin-top: -48px;
+  margin-left: 16px;
+}
+
+.card-avatar em {
+  position: absolute;
+  right: 16px;
+  top: 0px;
+  max-width: 140px;
+  font-size: 12px;
+  text-align: right;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-content strong {
+  display: block;
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  color: #787df9;
+  margin-bottom: 16px;
+  min-height: 42px;
+}
+
+.card-content p {
+  min-height: 76px;
+  font-size: 14px;
+}
+
+.card-content a {
+  color: #00bcc8;
+}
+
+.highlight {
+  color: #787df9;
+}
+
+.bggray {
+  position: absolute;
+  right: 0;
+  width: 49%;
+  margin-left: 10px;
+  background-color: #f0f0f0;
+}
+
+.box {
+  border: 1px solid #dadada;
+  border-radius: 20px;
+  padding: 8px;
+}
+
+/* mobile */
+@media (max-width:991px) {
+}
+
+/* desktop */
+@media (min-width:992px) {
+  .half-on-desktop {
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+    margin-bottom: 20px;
+  }
+
+  .sidebar {
+    font-family: Roboto, serif;
+    display: inline-block;
+    vertical-align: top;
+    width: 288px
+  }
+
+  .main {
+    display: inline-block;
+    position: relative;
+    max-width: calc(100% - 288px);
+    width: 100%;
+    vertical-align: top;
+    margin-bottom: 120px;
+  }
+}
